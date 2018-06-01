@@ -1,0 +1,35 @@
+---
+#测试环境
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: nfs
+spec:
+  schedule: "0 0 * * ?"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: nfs
+            image: harbor.enncloud.cn/huangjia/nfs-util:v1
+          restartPolicy: OnFailure
+          
+     
+---
+---
+#生产环境
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: nfs
+spec:
+  schedule: "0 0 * * ?"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: nfs
+            image: reg.enncloud.cn/huangjia/nfs-util:v1
+          restartPolicy: OnFailure
